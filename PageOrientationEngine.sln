@@ -1,0 +1,28 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2013
+VisualStudioVersion = 12.0.30110.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PageOrientationEngine", "PageOrientationEngine\PageOrientationEngine.csproj", "{F547F966-3A59-4894-B54C-661AAAEDAF65}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestTool", "TestTool\TestTool.csproj", "{F3151D3A-6A05-4378-B106-4307B705996F}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{F547F966-3A59-4894-B54C-661AAAEDAF65}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F547F966-3A59-4894-B54C-661AAAEDAF65}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F547F966-3A59-4894-B54C-661AAAEDAF65}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F547F966-3A59-4894-B54C-661AAAEDAF65}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F3151D3A-6A05-4378-B106-4307B705996F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F3151D3A-6A05-4378-B106-4307B705996F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F3151D3A-6A05-4378-B106-4307B705996F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F3151D3A-6A05-4378-B106-4307B705996F}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
