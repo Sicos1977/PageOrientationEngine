@@ -4,7 +4,7 @@ using System.Drawing;
 using System.Drawing.Imaging;
 using System.IO;
 
-namespace DocumentServices.Server.Utilities
+namespace PageOrientationEngine.Helpers
 {
     /// <summary>
     /// Deze classe bevat code om verschillende handelingen uit te kunnen voeren met Tiff bestanden.

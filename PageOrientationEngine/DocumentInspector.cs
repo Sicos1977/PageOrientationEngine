@@ -7,37 +7,39 @@ using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices;
 using System.Threading;
-using DocumentServices.Server.Utilities;
+using PageOrientationEngine.Helpers;
 using Tesseract;
 
-namespace TestApp
+namespace PageOrientationEngine
 {
     #region DocumentInspectorPageOrientation
+    /// <summary>
+    /// The orientation of the text on a page
+    /// </summary>
     public enum DocumentInspectorPageOrientation
     {
         /// <summary>
-        /// De text in de afbeelding is correct leesbaar
+        /// The text on page is correctly orientated
         /// </summary>
         PageCorrect,
 
         /// <summary>
-        /// De text in de afbeelding staat op zijn kop
+        /// The text on the page is upside down
         /// </summary>
         PageUpsideDown,
 
         /// <summary>
-        /// De text in de afbeelding is naar links geroteerd
+        /// The text on the page is rotated to the left
         /// </summary>
         PageRotatedLeft,
 
         /// <summary>
-        /// De text in de afbeelding is naar rechts geroteerd
+        /// The text on the page is rotated to the right
         /// </summary>
         PageRotatedRight,
 
         /// <summary>
-        /// De kwaliteit van de afbeelding is te slecht om te detecteren
-        /// hoe deze is geroteerd
+        /// The quality of text on the page is to bad to determine the orientation of the page
         /// </summary>
         Undetectable
     }
@@ -47,13 +49,25 @@ namespace TestApp
     {
         #region Internal class WorkQueueItem
         /// <summary>
-        /// Wordt gebruikt om het _workQueue veld mee te vullen
+        /// Used to track all the workqueue items
         /// </summary>
         private class WorkQueueItem
         {
+            /// <summary>
+            /// The number of the page
+            /// </summary>
             public int PageNumber { get; private set; }
+
+            /// <summary>
+            /// The page as a memory stream
+            /// </summary>
             public MemoryStream MemoryStream { get; private set; }
 
+            /// <summary>
+            /// Creates this object
+            /// </summary>
+            /// <param name="pageNumber">The number of the page</param>
+            /// <param name="memoryStream">The page as a memory stream</param>
             public WorkQueueItem(int pageNumber, MemoryStream memoryStream)
             {
                 PageNumber = pageNumber;
@@ -64,32 +78,37 @@ namespace TestApp
 
         #region Fields
         /// <summary>
-        /// De load queue
+        /// The load queue
         /// </summary>
         ConcurrentQueue<WorkQueueItem> _workQueue;
 
         /// <summary>
-        /// Bevat de resultaten van de pagina orientatie detectie
+        /// Contains all the result of the page orientation detection
         /// </summary>
         private ConcurrentDictionary<int, DocumentInspectorPageOrientation> _detectionResult;
         #endregion
 
         #region Properties
         /// <summary>
-        /// Het pad naar de Tesseract data bestanden
+        /// The path to the Tesseract data files
         /// </summary>
-        public string TesseractDataPath { get; set; }
+        public string TesseractDataPath { get; private set; }
 
         /// <summary>
-        /// De taal die gebruikt wordt door Tesseract
+        /// The language that needs to be used by Tesseract
         /// </summary>
-        public string TesseractLanguage { get; set; }
+        public string TesseractLanguage { get; private set; }
         #endregion
 
         #region Constructor
-        public DocumentInspector()
+        /// <summary>
+        /// Creates this object with the default <see cref="TesseractLanguage"/> language set to English.
+        /// Use the <see cref="TesseractLanguage"/>
+        /// </summary>
+        public DocumentInspector(string dataPath, string language)
         {
-            TesseractLanguage = "eng";
+            TesseractDataPath = dataPath;
+            TesseractLanguage = language;
         }
         #endregion
 
@@ -287,10 +306,7 @@ namespace TestApp
             while (!workDone)
             {
                 for (i = 0; i < procCount; i++)
-                {
                     workDone = threads[i].Join(10);
-                    if (!workDone) continue;
-                }
             }
 
             return _detectionResult.Select(detectionResult => detectionResult.Value).ToList();
