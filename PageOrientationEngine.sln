@@ -5,8 +5,6 @@ VisualStudioVersion = 12.0.30501.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PageOrientationEngine", "PageOrientationEngine\PageOrientationEngine.csproj", "{F547F966-3A59-4894-B54C-661AAAEDAF65}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestTool", "TestTool\TestTool.csproj", "{F3151D3A-6A05-4378-B106-4307B705996F}"
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{50FC342F-7B5B-49E0-8737-FBD321F64806}"
 	ProjectSection(SolutionItems) = preProject
 		.nuget\NuGet.Config = .nuget\NuGet.Config
@@ -24,10 +22,6 @@ Global
 		{F547F966-3A59-4894-B54C-661AAAEDAF65}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F547F966-3A59-4894-B54C-661AAAEDAF65}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F547F966-3A59-4894-B54C-661AAAEDAF65}.Release|Any CPU.Build.0 = Release|Any CPU
-		{F3151D3A-6A05-4378-B106-4307B705996F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{F3151D3A-6A05-4378-B106-4307B705996F}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{F3151D3A-6A05-4378-B106-4307B705996F}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{F3151D3A-6A05-4378-B106-4307B705996F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
