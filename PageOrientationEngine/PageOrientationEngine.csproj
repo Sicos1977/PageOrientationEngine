@@ -42,6 +42,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DocumentInspector.cs" />
+    <Compile Include="Helpers\BitmapUtils.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Helpers\TiffUtils.cs" />
     <Compile Include="Helpers\UnsafeBitmap.cs" />
