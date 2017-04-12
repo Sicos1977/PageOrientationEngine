@@ -50,8 +50,5 @@
       <Name>PageOrientationEngine</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup>
-    <Content Include="upsidedownexample.PNG" />
-  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
