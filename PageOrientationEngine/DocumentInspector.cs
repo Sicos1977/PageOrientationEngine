@@ -257,12 +257,16 @@ namespace PageOrientationEngine
                             if (firstMeanConfedence > 0.75)
                                 return DocumentInspectorPageOrientation.PageCorrect;
 
+                            // Rotate image 180 degrees
+                            croppedImage.RotateFlip(RotateFlipType.Rotate180FlipNone);
+                            //croppedImage.Save(@"d:\\Crop area flipped.tif", System.Drawing.Imaging.ImageFormat.Tiff);
+
                             using (var imageRotated180 = PixConverter.ToPix(croppedImage))
                             using (var pageRotated180 = engineCroppedImage.Process(imageRotated180))
                                 secondMeanConfedence = pageRotated180.GetMeanConfidence();
                         }
 
-                        if (croppedImage != null) croppedImage.Dispose();
+                        croppedImage.Dispose();
 
                         if (firstMeanConfedence > 0.40 && secondMeanConfedence > 0.40)
                             return firstMeanConfedence >= secondMeanConfedence

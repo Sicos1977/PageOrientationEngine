@@ -9,7 +9,7 @@ namespace TestApp
         static void Main(string[] args)
         {
             var poe = new DocumentInspector(@"c:\Program Files (x86)\Tesseract-OCR\tessdata\", "eng");
-            var results = poe.DetectPageOrientation(@"<some single or multipage tiff file");
+            var results = poe.DetectPageOrientation(@"d:\\example.tif");
             foreach(var result in results)
                 Console.WriteLine(result.ToString());
 
