@@ -208,7 +208,7 @@ namespace PageOrientationEngine
             if (bitmap.PixelFormat == PixelFormat.Format1bppIndexed)
                 bitmap = BitmapUtils.CopyToBpp(bitmap, 8);
 
-            using (var engine = new TesseractEngine(TesseractDataPath, TesseractLanguage))
+            using (var engine = new TesseractEngine(TesseractDataPath.Replace('/', '\\'), TesseractLanguage))
             {
                 var rect = new Rect();
 
@@ -266,12 +266,56 @@ namespace PageOrientationEngine
                                 secondMeanConfedence = pageRotated180.GetMeanConfidence();
                         }
 
-                        croppedImage.Dispose();
+                        
 
-                        if (firstMeanConfedence > 0.40 && secondMeanConfedence > 0.40)
+                        if (firstMeanConfedence > 0.75 && secondMeanConfedence > 0.75)
+                        {
+                            croppedImage.Dispose();
                             return firstMeanConfedence >= secondMeanConfedence
                                 ? DocumentInspectorPageOrientation.PageCorrect
                                 : DocumentInspectorPageOrientation.PageUpsideDown;
+                        }
+                        else
+                        {
+                            double thridMeanConfedence;
+                            croppedImage.RotateFlip(RotateFlipType.Rotate90FlipNone);
+                            //croppedImage.Save(@"d:\\Crop area flipped.tif", System.Drawing.Imaging.ImageFormat.Tiff);
+
+                            using (var engineCroppedImage = new TesseractEngine(TesseractDataPath, TesseractLanguage))
+                            {
+                                using (var imageRotated90 = PixConverter.ToPix(croppedImage))
+                                using (var pageRotated90 = engineCroppedImage.Process(imageRotated90))
+                                    thridMeanConfedence = pageRotated90.GetMeanConfidence();
+                            }
+                            if(thridMeanConfedence > 0.75)
+                            {
+                                croppedImage.Dispose();
+                                return DocumentInspectorPageOrientation.PageRotatedRight;
+                            }
+                            else
+                            {
+                                double fourthMeanConfedence;
+                                croppedImage.RotateFlip(RotateFlipType.Rotate90FlipNone);
+                                //croppedImage.Save(@"d:\\Crop area flipped.tif", System.Drawing.Imaging.ImageFormat.Tiff);
+
+                                using (var engineCroppedImage = new TesseractEngine(TesseractDataPath, TesseractLanguage))
+                                {
+                                    using (var imageRotated90 = PixConverter.ToPix(croppedImage))
+                                    using (var pageRotated90 = engineCroppedImage.Process(imageRotated90))
+                                        fourthMeanConfedence = pageRotated90.GetMeanConfidence();
+                                }
+                                if(thridMeanConfedence > fourthMeanConfedence)
+                                {
+                                    croppedImage.Dispose();
+                                    return DocumentInspectorPageOrientation.PageRotatedLeft;
+                                }
+                                else
+                                {
+                                    croppedImage.Dispose();
+                                    return DocumentInspectorPageOrientation.PageUpsideDown;
+                                }
+                            }
+                        }
 
                     }
                 }
