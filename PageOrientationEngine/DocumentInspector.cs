@@ -208,7 +208,7 @@ namespace PageOrientationEngine
             if (bitmap.PixelFormat == PixelFormat.Format1bppIndexed)
                 bitmap = BitmapUtils.CopyToBpp(bitmap, 8);
 
-            using (var engine = new TesseractEngine(TesseractDataPath.Replace('/', '\\'), TesseractLanguage))
+            using (var engine = new TesseractEngine(TesseractDataPath, TesseractLanguage))
             {
                 var rect = new Rect();
 
